@@ -2,10 +2,10 @@
     "version": 2,
     "builds": [
       {
-        "src": "src/package.json",                 
+        "src": "src/package.json",  
         "use": "@vercel/static-build",
         "config": {
-          "distDir": "dist"         
+          "distDir": "dist"  
         }
       },
       {
@@ -15,11 +15,11 @@
     ],
     "routes": [
       {
-        "src": "/api/(.*)",        
+        "src": "/api/(.*)",  
         "dest": "/backend/$1"
       },
       {
-        "src": "/(.*)",         
+        "src": "/(.*)",      
         "dest": "/dist/$1"
       }
     ]
