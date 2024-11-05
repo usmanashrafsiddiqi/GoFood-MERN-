@@ -23,7 +23,7 @@ export default function Card(props) {
     };
 
     const handleAddToCart = (e) => {
-        e.stopPropagation(); // Stop propagation to prevent navigating
+        e.stopPropagation(); // Prevent navigating
         const { qty, size } = state;
         const price = options[size] ? parseFloat(options[size]) : 0;
         const finalPrice = qty * price;

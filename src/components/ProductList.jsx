@@ -14,7 +14,6 @@ const ProductList = () => {
                     throw new Error('Failed to fetch products');
                 }
                 const data = await response.json();
-                console.log("Fetched Products:", data); // Debugging
                 setProducts(data);
             } catch (err) {
                 setError(err.message);
@@ -28,19 +27,26 @@ const ProductList = () => {
 
     if (loading) return <div>Loading products...</div>;
     if (error) return <div>Error: {error}</div>;
-    if (products.length === 0) return <div>No products available.</div>;
 
+    // Group products by category name
     const categories = [...new Set(products.map(product => product.CategoryName))];
 
     return (
-        <div>
-            {categories.map(category => (
-                <FoodSection 
-                    key={category} 
-                    categoryName={category} 
-                    products={products.filter(product => product.CategoryName === category)} 
-                />
-            ))}
+        <div className="container">
+            {categories.length > 0 ? (
+                categories.map(category => {
+                    const filteredProducts = products.filter(product => product.CategoryName === category);
+                    return (
+                        <FoodSection 
+                            key={category} 
+                            categoryName={category} 
+                            products={filteredProducts} 
+                        />
+                    );
+                })
+            ) : (
+                <p>No products available</p>
+            )}
         </div>
     );
 };
